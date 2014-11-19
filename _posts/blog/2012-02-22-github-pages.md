@@ -152,7 +152,7 @@ Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信�
 
 创建好`username.github.io`项目之后，提交一个`index.html`文件，然后`push`到GitHub的`master`分支（也就是普通意义上的主干）。第一次页面生效需要一些时间，大概10分钟左右。
 
-生效之后，访问`username.github.io`就可以看到你上传的页面了，[beiyuu.github.com][7]就是一个例子。
+生效之后，访问`username.github.io`就可以看到你上传的页面了，[beiyuu.github.io][7]就是一个例子。
 
 关于第二种项目`pages`，简单提一下，他和用户pages使用的后台程序是同一套，只不过它的目的是项目的帮助文档等跟项目绑定的内容，所以需要在项目的`gh-pages`分支上去提交相应的文件，GitHub会自动帮你生成项目pages。具体的使用帮助可以参考[Github Pages][]的官方文档：
 
@@ -300,8 +300,8 @@ Google的高亮插件使用也比较方便，只需要在`<pre>`的标签上加�
 
 作为生活在水深火热的墙内人民，有必要进行下面一步修改gem的源，方便我们更快的下载所需组建：
 
-    sudo gem sources --remove http://rubygems.org/ 
-    sudo gem sources -a http://ruby.taobao.org/ 
+    sudo gem sources --remove http://rubygems.org/
+    sudo gem sources -a http://ruby.taobao.org/
 
 然后用Gem安装jekyll
 
@@ -349,11 +349,11 @@ Google的高亮插件使用也比较方便，只需要在`<pre>`的标签上加�
 [4]: http://progit.org/book/zh/ "Pro Git中文版"
 [5]: http://help.github.com/mac-set-up-git/ "Mac下Git安装"
 [6]: http://help.github.com/ssh-key-passphrases/
-[7]: http://beiyuu.github.com
+[7]: http://beiyuu.github.io
 [8]: https://github.com/mojombo/jekyll/blob/master/README.textile
 [9]: https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter
 [10]: https://github.com/mojombo/jekyll/wiki/configuration
-[11]: https://github.com/beiyuu/beiyuu.github.com
+[11]: https://github.com/beiyuu/Github-Pages-Example
 [12]: http://docs.disqus.com/developers/universal/
 [13]: http://mihai.bazon.net/projects/javascript-syntax-highlighting-engine
 [14]: http://code.google.com/p/google-code-prettify/
