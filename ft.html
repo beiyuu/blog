@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>分组</title>
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no" />
+  <script>
+function FastClick(e,t){function n(e,t){return function(){return e.apply(t,arguments)}}var i;if(t=t||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=t.touchBoundary||10,this.layer=e,this.tapDelay=t.tapDelay||200,this.tapTimeout=t.tapTimeout||700,!FastClick.notNeeded(e)){for(var o=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],r=this,c=0,a=o.length;a>c;c++)r[o[c]]=n(r[o[c]],r);deviceIsAndroid&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var o=Node.prototype.removeEventListener;"click"===t?o.call(e,t,n.hijacked||n,i):o.call(e,t,n,i)},e.addEventListener=function(t,n,i){var o=Node.prototype.addEventListener;"click"===t?o.call(e,t,n.hijacked||(n.hijacked=function(e){e.propagationStopped||n(e)}),i):o.call(e,t,n,i)}),"function"==typeof e.onclick&&(i=e.onclick,e.addEventListener("click",function(e){i(e)},!1),e.onclick=null)}}var deviceIsWindowsPhone=navigator.userAgent.indexOf("Windows Phone")>=0,deviceIsAndroid=navigator.userAgent.indexOf("Android")>0&&!deviceIsWindowsPhone,deviceIsIOS=/iP(ad|hone|od)/.test(navigator.userAgent)&&!deviceIsWindowsPhone,deviceIsIOS4=deviceIsIOS&&/OS 4_\d(_\d)?/.test(navigator.userAgent),deviceIsIOSWithBadTarget=deviceIsIOS&&/OS [6-7]_\d/.test(navigator.userAgent),deviceIsBlackBerry10=navigator.userAgent.indexOf("BB10")>0;FastClick.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled)return!0;break;case"input":if(deviceIsIOS&&"file"===e.type||e.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(e.className)},FastClick.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!deviceIsAndroid;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}},FastClick.prototype.sendClick=function(e,t){var n,i;document.activeElement&&document.activeElement!==e&&document.activeElement.blur(),i=t.changedTouches[0],n=document.createEvent("MouseEvents"),n.initMouseEvent(this.determineEventType(e),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,e.dispatchEvent(n)},FastClick.prototype.determineEventType=function(e){return deviceIsAndroid&&"select"===e.tagName.toLowerCase()?"mousedown":"click"},FastClick.prototype.focus=function(e){var t;deviceIsIOS&&e.setSelectionRange&&0!==e.type.indexOf("date")&&"time"!==e.type&&"month"!==e.type?(t=e.value.length,e.setSelectionRange(t,t)):e.focus()},FastClick.prototype.updateScrollParent=function(e){var t,n;if(t=e.fastClickScrollParent,!t||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n,e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}t&&(t.fastClickLastScrollTop=t.scrollTop)},FastClick.prototype.getTargetElementFromEventTarget=function(e){return e.nodeType===Node.TEXT_NODE?e.parentNode:e},FastClick.prototype.onTouchStart=function(e){var t,n,i;if(e.targetTouches.length>1)return!0;if(t=this.getTargetElementFromEventTarget(e.target),n=e.targetTouches[0],deviceIsIOS){if(i=window.getSelection(),i.rangeCount&&!i.isCollapsed)return!0;if(!deviceIsIOS4){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return e.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(t)}}return this.trackingClick=!0,this.trackingClickStart=e.timeStamp,this.targetElement=t,this.touchStartX=n.pageX,this.touchStartY=n.pageY,e.timeStamp-this.lastClickTime<this.tapDelay&&e.preventDefault(),!0},FastClick.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;return Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n?!0:!1},FastClick.prototype.onTouchMove=function(e){return this.trackingClick?((this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e))&&(this.trackingClick=!1,this.targetElement=null),!0):!0},FastClick.prototype.findControl=function(e){return void 0!==e.control?e.control:e.htmlFor?document.getElementById(e.htmlFor):e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},FastClick.prototype.onTouchEnd=function(e){var t,n,i,o,r,c=this.targetElement;if(!this.trackingClick)return!0;if(e.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(e.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=e.timeStamp,n=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,deviceIsIOSWithBadTarget&&(r=e.changedTouches[0],c=document.elementFromPoint(r.pageX-window.pageXOffset,r.pageY-window.pageYOffset)||c,c.fastClickScrollParent=this.targetElement.fastClickScrollParent),i=c.tagName.toLowerCase(),"label"===i){if(t=this.findControl(c)){if(this.focus(c),deviceIsAndroid)return!1;c=t}}else if(this.needsFocus(c))return e.timeStamp-n>100||deviceIsIOS&&window.top!==window&&"input"===i?(this.targetElement=null,!1):(this.focus(c),this.sendClick(c,e),deviceIsIOS&&"select"===i||(this.targetElement=null,e.preventDefault()),!1);return deviceIsIOS&&!deviceIsIOS4&&(o=c.fastClickScrollParent,o&&o.fastClickLastScrollTop!==o.scrollTop)?!0:(this.needsClick(c)||(e.preventDefault(),this.sendClick(c,e)),!1)},FastClick.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},FastClick.prototype.onMouse=function(e){return this.targetElement?e.forwardedTouchEvent?!0:e.cancelable&&(!this.needsClick(this.targetElement)||this.cancelNextClick)?(e.stopImmediatePropagation?e.stopImmediatePropagation():e.propagationStopped=!0,e.stopPropagation(),e.preventDefault(),!1):!0:!0},FastClick.prototype.onClick=function(e){var t;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===e.target.type&&0===e.detail?!0:(t=this.onMouse(e),t||(this.targetElement=null),t)},FastClick.prototype.destroy=function(){var e=this.layer;deviceIsAndroid&&(e.removeEventListener("mouseover",this.onMouse,!0),e.removeEventListener("mousedown",this.onMouse,!0),e.removeEventListener("mouseup",this.onMouse,!0)),e.removeEventListener("click",this.onClick,!0),e.removeEventListener("touchstart",this.onTouchStart,!1),e.removeEventListener("touchmove",this.onTouchMove,!1),e.removeEventListener("touchend",this.onTouchEnd,!1),e.removeEventListener("touchcancel",this.onTouchCancel,!1)},FastClick.notNeeded=function(e){var t,n,i,o;if(void 0===window.ontouchstart)return!0;if(n=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!deviceIsAndroid)return!0;if(t=document.querySelector("meta[name=viewport]")){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(n>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(deviceIsBlackBerry10&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/),i[1]>=10&&i[2]>=3&&(t=document.querySelector("meta[name=viewport]")))){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===e.style.msTouchAction||"manipulation"===e.style.touchAction?!0:(o=+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1],27>o||(t=document.querySelector("meta[name=viewport]"),!t||-1===t.content.indexOf("user-scalable=no")&&document.documentElement.scrollWidth>window.outerWidth)?"none"===e.style.touchAction||"manipulation"===e.style.touchAction?!0:!1:!0)},FastClick.attach=function(e,t){return new FastClick(e,t)};
+  </script>
+  <script>
+function Shake(t){if(this.hasDeviceMotion="ondevicemotion"in window,this.options={threshold:15,timeout:1e3},"object"==typeof t)for(var e in t)t.hasOwnProperty(e)&&(this.options[e]=t[e]);if(this.lastTime=new Date,this.lastX=null,this.lastY=null,this.lastZ=null,"function"==typeof document.CustomEvent)this.event=new document.CustomEvent("shake",{bubbles:!0,cancelable:!0});else{if("function"!=typeof document.createEvent)return!1;this.event=document.createEvent("Event"),this.event.initEvent("shake",!0,!0)}}Shake.prototype.reset=function(){this.lastTime=new Date,this.lastX=null,this.lastY=null,this.lastZ=null},Shake.prototype.start=function(){this.reset(),this.hasDeviceMotion&&window.addEventListener("devicemotion",this,!1)},Shake.prototype.stop=function(){this.hasDeviceMotion&&window.removeEventListener("devicemotion",this,!1),this.reset()},Shake.prototype.devicemotion=function(t){var e,i,s=t.accelerationIncludingGravity,n=0,o=0,h=0;return null===this.lastX&&null===this.lastY&&null===this.lastZ?(this.lastX=s.x,this.lastY=s.y,void(this.lastZ=s.z)):(n=Math.abs(this.lastX-s.x),o=Math.abs(this.lastY-s.y),h=Math.abs(this.lastZ-s.z),(n>this.options.threshold&&o>this.options.threshold||n>this.options.threshold&&h>this.options.threshold||o>this.options.threshold&&h>this.options.threshold)&&(e=new Date,i=e.getTime()-this.lastTime.getTime(),i>this.options.timeout&&(window.dispatchEvent(this.event),this.lastTime=new Date)),this.lastX=s.x,this.lastY=s.y,void(this.lastZ=s.z))},Shake.prototype.handleEvent=function(t){return"function"==typeof this[t.type]?this[t.type](t):void 0};
+  </script>
+  <style>
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-family: inherit; font-size: 100%; vertical-align: baseline; } body { line-height: 1; color: #000; background: #fff; } ol, ul { list-style: none; } table { border-collapse: separate; border-spacing: 0; vertical-align: middle; } caption, th, td { text-align: left; font-weight: normal; vertical-align: middle; } a img { border: none; } * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; } *:before, *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+    .box {
+      font-size: 12px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding: 4%;
+    }
+
+    .item {
+      float: left;
+      width: 48%;
+      height: 49%;
+      position: relative;
+      -webkit-perspective: 800px;
+      perspective: 800px;
+      tap-highlight-color: rgba(0,0,0,0);
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    .item:nth-child(n) {
+      margin-right: 2%;
+    }
+    .item:nth-child(2n) {
+      margin-left: 2%;
+      margin-right: 0;
+    }
+    .item:nth-child(1),
+    .item:nth-child(2) {
+      margin-bottom: 2%;
+    }
+    .item:nth-child(3),
+    .item:nth-child(4) {
+      margin-top: 2%;
+    }
+    .card {
+      background-color: rgba(0,0,0,0.2);
+      font-size: 3.5em;
+      border-radius: 6px;
+      text-align: center;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-transition-property: -webkit-transform;
+      transition-property: transform;
+      -webkit-transition-duration: .3s;
+      transition-duration: .3s;
+      tap-highlight-color: rgba(0,0,0,0);
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .front,
+    .back {
+      border-radius: 6px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-transition: .3s;
+      transition: .3s;
+    }
+    .front {
+    }
+    .back {
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+    .blue {
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7abcff), color-stop(44%,#60abf8), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
+      background: linear-gradient(to bottom, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* W3C */
+    }
+    .red {
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f85032), color-stop(100%,#f16f5c), color-stop(100%,#e73827)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #f85032 0%,#f16f5c 100%,#e73827 100%); /* Chrome10+,Safari5.1+ */
+      background: linear-gradient(to bottom, #f85032 0%,#f16f5c 100%,#e73827 100%); /* W3C */
+    }
+    .flipped {
+      -webkit-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+    }
+    .card span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 15em;
+      color: #fff;
+      -webkit-transform: translateY(-50%) translateX(-50%);
+      transform: translateY(-50%) translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="item">
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <div class="front"></div>
+        <div class="back"><span>前锋</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      FastClick.attach(document.body);
+      function shuffle(o) {
+        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+      }
+
+      var role = [
+        {color: 'blue', text: '前锋'},
+        {color: 'blue', text: '后卫'},
+        {color: 'red', text: '前锋'},
+        {color: 'red', text: '后卫'}
+        ]
+
+      var cards = document.querySelectorAll('.card')
+      var backs = document.querySelectorAll('.back')
+
+      function reset() {
+        role = shuffle(role)
+
+        for(var i=0; i<backs.length; i++) {
+          cards[i].classList.remove('flipped')
+          backs[i].classList.remove('blue')
+          backs[i].classList.remove('red')
+
+          backs[i].classList.add(role[i].color)
+          backs[i].innerHTML = '<span>'+ role[i].text +'</span>'
+        }
+      }
+
+      for(var i=0; i<cards.length; i++) {
+        cards[i].addEventListener('click', function(e) {
+          this.classList.add('flipped')
+        })
+      }
+
+      var shakeEvent = new Shake({threshold: 10});
+      shakeEvent.start();
+      window.addEventListener('shake', function(){
+        reset()
+      }, false);
+
+      reset()
+    })()
+  </script>
+</body>
+</html>
