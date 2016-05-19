@@ -44,6 +44,7 @@ $(document).ready(function(){
     });
 
     (function(){
+      return false
         var ie6 = ($.browser.msie && $.browser.version=="6.0") ? true : false;
 
         function initHeading(){
