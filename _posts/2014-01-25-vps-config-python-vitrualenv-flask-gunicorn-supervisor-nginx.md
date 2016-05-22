@@ -11,7 +11,8 @@ category: blog
 
 我们目标实现一个支持多个独立域名网站的线上Python环境，这会用到[Virtualenv][VE]， [Flask][Flask]， [Gunicorn][GU]， [Supervisor][SV]， [Nginx][Nginx]。
 
-##配置用户环境
+## 配置用户环境
+
 因为要跑多个站，所以最好将他们完全隔离，每个站对应一个用户，于是我们有了：
 
      User        Site
@@ -78,7 +79,7 @@ category: blog
   <li><a href="http://www.ruanyifeng.com/blog/2014/03/server_setup.html" target="_blank" class="external">Linux服务器的初步配置流程</a></li>
 </ul>
 
-##为每个APP创建Virtualenv
+## 为每个APP创建Virtualenv
 
 [Virtualenv][VE]可以为每个Python应用创建独立的开发环境，使他们互不影响，Virtualenv能够做到：
 <ul>
@@ -109,7 +110,7 @@ category: blog
 
     ##michael用户如法炮制即可
 
-##安装Flask
+## 安装Flask
 [Flask][Flask]是Python流行的一个web框架，但是Flask比Django轻量了许多，使用更加直观，这里并不展开讲Flask的细节，当做一个Hello Wordld来用就好了。
 
     ##安装Flask
@@ -132,7 +133,7 @@ category: blog
 
 写入之后，如果在本地机器上可以运行`python runserver.py`，然后打开`127.0.0.1:5000`看到Hello World!了，但在VPS，这样不行，等待后面配置吧。
 
-##安装Gunicorn
+## 安装Gunicorn
 [Gunicorn][Gu]是用于部署WSGI应用的，任何支持WSGI的都可以，虽说直接`python runserver.py`这样网站也能跑起来，但那是方便开发而已，在线上环境，还是需要更高效的组件来做。
 
     ##安装Gunicorn
@@ -208,7 +209,8 @@ Gunicorn的配置是必须的，因为我们要上两个独立的站，所以不
             ├── gunicorn_conf.py  //Gunicorn的配置文件
             └── runserver.py  //hello_world程序
 
-##安装Supervisor
+## 安装Supervisor
+
 [Supervisor][SV]可以同时启动多个应用，最重要的是，当某个应用Crash的时候，他可以自动重启该应用，保证可用性。
 
     ##安装Supervisor
@@ -274,7 +276,8 @@ Gunicorn的配置是必须的，因为我们要上两个独立的站，所以不
     sudo service supervisor stop
     sudo service supervisor start
 
-##安装Nginx
+## 安装Nginx
+
 有了[Gunicorn][GU]、[Supervisor][SV]，本地的环境的算是搭好了，但是我们需要让VPS上的网站从外网可以访问，这时候需要Nginx。
 
 [Nginx][Nginx]是轻量级、性能强、占用资源少，能很好的处理高并发的反向代理软件，是我们的不二选择：
@@ -347,7 +350,8 @@ Nginx的配置文件和Supervisor类似，不同的程序可以分别配置，�
 
 配置完成之后，'sudo service nginx restart'重启一下服务，再配置一下本地的Hosts，打开浏览器应该就能看到了。
 
-##完成
+## 完成
+
 至此，一个完整的环境搭建就完成了，推荐试用[DigitalOcean][DO]的VPS看看，用我的[Refer][DO]注册立刻可以得到$10的Credit赠送。
 
 

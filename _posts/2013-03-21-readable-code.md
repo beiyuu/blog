@@ -10,7 +10,7 @@ category: blog
 - 英文版：[《The Art of Readable Code》][RCEN]
 - 中文版：[编写可读代码的艺术][RCCN]
 
-##代码为什么要易于理解
+## 代码为什么要易于理解
 
 > "Code should be written to minimize the time it would take for someone else to understand it."
 
@@ -26,18 +26,18 @@ category: blog
 
 整本书都围绕“如何让代码的可读性更高”这个目标来写。这也是好代码的重要标准之一。
 
-##如何命名
+## 如何命名
 
-###变量名中应包含更多信息
+### 变量名中应包含更多信息
 
-####使用含义明确的词，比如用`download`而不是`get`，参考以下替换方案：
+#### 使用含义明确的词，比如用`download`而不是`get`，参考以下替换方案：
 
      send -> deliver, dispatch, announce, distribute, route
      find -> search, extract, locate, recover
     start -> lanuch, create, begin, open
      make -> create,set up, build, generate, compose, add, new
 
-####避免通用的词
+#### 避免通用的词
 
 像`tmp`和`retval`这样词，除了说明是临时变量和返回值之外，没有任何意义。但是给他加一些有意义的词，就会很明确：
 
@@ -62,13 +62,13 @@ category: blog
 
 所以，当使用一些通用的词，要有充分的理由才可以。
 
-####使用具体的名字
+#### 使用具体的名字
 
 `CanListenOnPort`就比`ServerCanStart`好，can start比较含糊，而listen on port确切的说明了这个方法将要做什么。
 
 `--run_locally`就不如`--extra_logging`来的明确。
 
-####增加重要的细节，比如变量的单位`_ms`，对原始字符串加`_raw`
+#### 增加重要的细节，比如变量的单位`_ms`，对原始字符串加`_raw`
 
 如果一个变量很重要，那么在名字上多加一些额外的字就会更加易读，比如将`string id; // Example: "af84ef845cd8"`换成`string hex_id;`。
 
@@ -84,11 +84,11 @@ category: blog
         html  ->  html_utf8
         data  ->  data_urlenc
 
-####对于作用域大的变量使用较长的名字
+#### 对于作用域大的变量使用较长的名字
 
 在比较小的作用域内，可以使用较短的变量名，在较大的作用域内使用的变量，最好用长一点的名字，编辑器的自动补全都可以很好的减少键盘输入。对于一些缩写前缀，尽量选择众所周知的(如str)，一个判断标准是，当新成员加入时，是否可以无需他人帮助而明白前缀代表什么。
 
-####合理使用`_`、`-`等符号，比如对私有变量加`_`前缀。
+#### 合理使用`_`、`-`等符号，比如对私有变量加`_`前缀。
 
     var x = new DatePicker(); // DatePicker() 是类的"构造"函数，大写开始
     var y = pageHeight(); // pageHeight() 是一个普通函数
@@ -99,7 +99,7 @@ category: blog
     //id和class的写法分开
     <div id="middle_column" class="main-content"> ...
 
-###命名不能有歧义
+### 命名不能有歧义
 
 命名的时候可以先想一下，我要用的这个词是否有别的含义。举个例子：
 
@@ -107,7 +107,7 @@ category: blog
 
 现在的结果到底是包含2011年之前的呢还是不包含呢？
 
-####使用`min`、`max`代替`limit`
+#### 使用`min`、`max`代替`limit`
 
     CART_TOO_BIG_LIMIT = 10
         if shopping_cart.num_items() >= CART_TOO_BIG_LIMIT:
@@ -119,7 +119,7 @@ category: blog
 
 对比上例中`CART_TOO_BIG_LIMIT`和`MAX_ITEMS_IN_CART`，想想哪个更好呢？
 
-####使用`first`和`last`来表示闭区间
+#### 使用`first`和`last`来表示闭区间
 
     print integer_range(start=2, stop=4)
     # Does this print [2,3] or [2,3,4] (or something else)?
@@ -128,7 +128,7 @@ category: blog
 
 `first`和`last`含义明确，适宜表示闭区间。
 
-####使用`beigin`和`end`表示前闭后开([2,9))区间
+#### 使用`beigin`和`end`表示前闭后开([2,9))区间
 
     PrintEventsInRange("OCT 16 12:00am", "OCT 17 12:00am")
 
@@ -136,7 +136,7 @@ category: blog
 
 上面一种写法就比下面的舒服多了。
 
-####Boolean型变量命名
+#### Boolean型变量命名
 
     bool read_password = true;
 
@@ -145,7 +145,7 @@ category: blog
                  SpaceLeft()  -->  hasSpaceLeft()
     bool disable_ssl = false  -->  bool use_ssl = true
 
-####符合预期
+#### 符合预期
 
     public class StatisticsCollector {
         public void addSample(double x) { ... }
@@ -157,7 +157,7 @@ category: blog
 
 在这个例子中，`getMean`方法遍历了所有的样本，返回总额，所以并不是普通意义上轻量的`get`方法，所以应该取名`computeMean`比较合适。
 
-##漂亮的格式
+## 漂亮的格式
 
 写出来漂亮的格式，充满美感，读起来自然也会舒服很多，对比下面两个例子：
 
@@ -189,7 +189,7 @@ category: blog
         double maximum;
     };
 
-###考虑断行的连续性和简洁
+### 考虑断行的连续性和简洁
 
 这段代码需要断行，来满足不超过一行80个字符的要求，参数也需要注释说明：
 
@@ -252,7 +252,7 @@ category: blog
             new TcpConnectionSimulator(100,    400,    250,     5);
     }
 
-###用函数封装
+### 用函数封装
 
     // Turn a partial_name like "Doug Adams" into "Mr. Douglas Adams".
     // If not possible, 'error' is filled with an explanation.
@@ -288,7 +288,7 @@ category: blog
         assert(full_name == expected_full_name);
     }
 
-###列对齐
+### 列对齐
 
 列对齐可以让代码段看起来更舒适：
 
@@ -307,7 +307,7 @@ category: blog
         ...
     };
 
-###代码用块区分
+### 代码用块区分
 
     class FrontendServer {
         public:
@@ -383,12 +383,13 @@ category: blog
 
 让代码看起来更舒服，需要在写的过程中多注意，培养一些好的习惯，尤其当团队合作的时候，代码风格比如大括号的位置并没有对错，但是不遵循团队规范那就是错的。
 
-##如何写注释
+## 如何写注释
+
 当你写代码的时候，你会思考很多，但是最终呈现给读者的就只剩代码本身了，额外的信息丢失了，所以注释的目的就是让读者了解更多的信息。
 
-###应该注释什么
+### 应该注释什么
 
-####不应该注释什么
+#### 不应该注释什么
 
 这样的注释毫无价值：
 
@@ -403,14 +404,14 @@ category: blog
             double GetProfit();
     };
 
-####不要像下面这样为了注释而注释：
+#### 不要像下面这样为了注释而注释：
 
     // Find a Node with the given 'name' or return NULL.
     // If depth <= 0, only 'subtree' is inspected.
     // If depth == N, only 'subtree' and N levels below are inspected.
     Node* FindNodeInSubtree(Node* subtree, string name, int depth);
 
-####不要给烂取名注释
+#### 不要给烂取名注释
 
     // Enforce limits on the Reply as stated in the Request,
     // such as the number of items returned, or total byte size, etc.
@@ -421,7 +422,7 @@ category: blog
     // Make sure 'reply' meets the count/byte/etc. limits from the 'request'
     void EnforceLimitsFromRequest(Request request, Reply reply);
 
-####记录你的想法
+#### 记录你的想法
 
 我们讨论了不该注释什么，那么应该注释什么呢？注释应该记录你思考代码怎么写的结果，比如像下面这些：
 
@@ -450,7 +451,7 @@ category: blog
     HACK  : Adimittedly inelegant solution to a problem
     XXX   : Danger! Major problem here
 
-####站在读者的角度去思考
+#### 站在读者的角度去思考
 当别人读你的代码时，让他们产生疑问的部分，就是你应该注释的地方。
 
     struct Recorder {
@@ -466,7 +467,7 @@ category: blog
     // Force vector to relinquish its memory (look up "STL swap trick")
     vector<float>().swap(data);
 
-####说明可能陷阱
+#### 说明可能陷阱
 
 你在写代码的过程中，可能用到一些hack，或者有其他需要读代码的人知道的陷阱，这时候就应该注释：
 
@@ -477,14 +478,14 @@ category: blog
     // Calls an external service to deliver email.  (Times out after 1 minute.)
     void SendEmail(string to, string subject, string body);
 
-####全景的注释
+#### 全景的注释
 
 有时候为了更清楚说明，需要给整个文件加注释，让读者有个总体的概念：
 
     // This file contains helper functions that provide a more convenient interface to our
     // file system. It handles file permissions and other nitty-gritty details.
 
-####总结性的注释
+#### 总结性的注释
 
 即使是在函数内部，也可以有类似文件注释那样的说明注释：
 
@@ -506,11 +507,11 @@ category: blog
 
 很多人不愿意写注释，确实，要写好注释也不是一件简单的事情，也可以在文件专门的地方，留个写注释的区域，可以写下你任何想说的东西。
 
-###注释应简明准确
+### 注释应简明准确
 
 前一个小节讨论了注释应该写什么，这一节来讨论应该怎么写，因为注释很重要，所以要写的精确，注释也占据屏幕空间，所以要简洁。
 
-####精简注释
+#### 精简注释
 
     // The int is the CategoryType.
     // The first float in the inner pair is the 'score',
@@ -522,7 +523,7 @@ category: blog
     // CategoryType -> (score, weight)
     typedef hash_map<int, pair<float, float> > ScoreMap;
 
-####避免有歧义的代词
+#### 避免有歧义的代词
 
     // Insert the data into the cache, but check if it's too big first.
 
@@ -534,7 +535,7 @@ category: blog
 
     // If the data is small enough, insert it into the cache.
 
-####语句要精简准确
+#### 语句要精简准确
 
     # Depending on whether we've already crawled this URL before, give it a different priority.
 
@@ -542,7 +543,7 @@ category: blog
 
     # Give higher priority to URLs we've never crawled before.
 
-####精确描述函数的目的
+#### 精确描述函数的目的
 
     // Return the number of lines in this file.
     int CountLines(string filename) { ... }
@@ -560,7 +561,7 @@ category: blog
     // Count how many newline bytes ('\n') are in the file.
     int CountLines(string filename) { ... }
 
-####用实例说明边界情况
+#### 用实例说明边界情况
 
     // Rearrange 'v' so that elements < pivot come before those >= pivot;
     // Then return the largest 'i' for which v[i] < pivot (or -1 if none are < pivot)
@@ -572,7 +573,7 @@ category: blog
     // Example: Partition([8 5 9 8 2], 8) might result in [5 2 | 8 9 8] and return 1
     int Partition(vector<int>* v, int pivot);
 
-####说明你的代码的真正目的
+#### 说明你的代码的真正目的
 
     void DisplayProducts(list<Product> products) {
         products.sort(CompareProductByPrice);
@@ -588,7 +589,7 @@ category: blog
     // Display each price, from highest to lowest
     for (list<Product>::reverse_iterator it = products.rbegin(); ... )
 
-####函数调用时的注释
+#### 函数调用时的注释
 
 看见这样的一个函数调用，肯定会一头雾水：
 
@@ -601,7 +602,7 @@ category: blog
     # Call the function using named parameters
     Connect(timeout = 10, use_encryption = False)
 
-####使用信息含量丰富的词
+#### 使用信息含量丰富的词
 
     // This class contains a number of members that store the same information as in the
     // database, but are stored here for speed. When this class is read from later, those
@@ -613,13 +614,13 @@ category: blog
     // This class acts as a caching layer to the database.
 
 
-##简化循环和逻辑
+## 简化循环和逻辑
 
-###流程控制要简单
+### 流程控制要简单
 
 让条件语句、循环以及其他控制流程的代码尽可能自然，让读者在阅读过程中不需要停顿思考或者在回头查找，是这一节的目的。
 
-####条件语句中参数的位置
+#### 条件语句中参数的位置
 
 对比下面两种条件的写法：
 
@@ -638,7 +639,7 @@ category: blog
 
 这就解释了为什么`bytes_received < bytes_expected`比反过来更好理解。
 
-####if/else的顺序
+#### if/else的顺序
 
 通常，`if/else`的顺序你可以自由选择，下面这两种都可以：
 
@@ -684,7 +685,7 @@ category: blog
         ...
     }
 
-####三目运算符(?:)
+#### 三目运算符(?:)
 
     time_str += (hour >= 12) ? "pm" : "am";
 
@@ -707,7 +708,7 @@ category: blog
 
 所以只在简单表达式的地方用。
 
-####避免使用do/while表达式
+#### 避免使用do/while表达式
 
     do {
         continue;
@@ -715,7 +716,7 @@ category: blog
 
 这段代码会执行几遍呢，需要时间思考一下，`do/while`完全可以用别的方法代替，所以应避免使用。
 
-####尽早return
+#### 尽早return
 
     public boolean Contains(String str, String substr) {
         if (str == null || substr == null) return false;
@@ -725,7 +726,7 @@ category: blog
 
 函数里面尽早的return，可以让逻辑更加清晰。
 
-####减少嵌套
+#### 减少嵌套
 
     if (user_result == SUCCESS) {
         if (permission_result != SUCCESS) {
@@ -777,10 +778,11 @@ category: blog
         ...
     }
 
-###拆分复杂表达式
+### 拆分复杂表达式
+
 很显然的，越复杂的表达式，读起来越费劲，所以应该把那些复杂而庞大的表达式，拆分成一个个易于理解的小式子。
 
-####用变量
+#### 用变量
 
 将复杂表达式拆分最简单的办法，就是增加一个变量：
 
@@ -811,7 +813,7 @@ category: blog
         // document is read-only...
     }
 
-####逻辑替换
+#### 逻辑替换
 
 - 1) not (a or b or c)   <--> (not a) and (not b) and (not c)
 - 2) not (a and b and c) <--> (not a) or (not b) or (not c)
@@ -823,7 +825,7 @@ category: blog
     //替换
     if (!file_exists || is_protected) Error("Sorry, could not read file.");
 
-####不要滥用逻辑表达式
+#### 不要滥用逻辑表达式
 
     assert((!(bucket = FindBucket(key))) || !bucket->IsOccupied());
 
@@ -836,7 +838,7 @@ category: blog
 
     x = a || b || c
 
-####拆解大表达式
+#### 拆解大表达式
 
     var update_highlight = function (message_num) {
         if ($("#vote_value" + message_num).html() === "Up") {
@@ -872,13 +874,13 @@ category: blog
     }
 
 
-###变量与可读性
+### 变量与可读性
 
-####消除变量
+#### 消除变量
 
 前一节，讲到利用变量来拆解大表达式，这一节来讨论如何消除多余的变量。
 
-####没用的临时变量
+#### 没用的临时变量
 
     now = datetime.datetime.now()
     root_message.last_view_time = now
@@ -895,7 +897,7 @@ category: blog
 
     root_message.last_view_time = datetime.datetime.now()
 
-####消除条件控制变量
+#### 消除条件控制变量
 
     boolean done = false;
     while (/* condition */ && !done) {
@@ -917,7 +919,7 @@ category: blog
 
 这个例子非常容易修改，如果是比较复杂的嵌套，`break`可能并不够用，这时候就可以把代码封装到函数中。
 
-####减少变量的作用域
+#### 减少变量的作用域
 
 我们都听过要避免使用全局变量这样的忠告，是的，当变量的作用域越大，就越难追踪，所以要保持变量小的作用域。
 
@@ -949,7 +951,7 @@ category: blog
 
 将`str`通过变量函数参数传递，减小了作用域，也更易读。同样的道理也可以用在定义类的时候，将大类拆分成一个个小类。
 
-####不要使用嵌套的作用域
+#### 不要使用嵌套的作用域
 
     # No use of example_value up to this point.
     if request:
@@ -985,7 +987,7 @@ category: blog
                     LogExample(value)  # deal with 'value' immediately
                     break
 
-####用到了再声明
+#### 用到了再声明
 
 在C语言中，要求将所有的变量事先声明，这样当用到变量较多时候，读者处理这些信息就会有难度，所以一开始没用到的变量，就暂缓声明：
 
@@ -1019,11 +1021,11 @@ category: blog
 
         return filtered_replies
 
-####变量最好只写一次
+#### 变量最好只写一次
 
 前面讨论了过多的变量会让读者迷惑，同一个变量，不停的被赋值也会让读者头晕，如果变量变化的次数少一些，代码可读性就更强。
 
-####一个例子
+#### 一个例子
 
 假设有一个页面，如下，需要给第一个空的`input`赋值：
 
@@ -1079,9 +1081,9 @@ category: blog
     };
 
 
-##重新组织你的代码
+## 重新组织你的代码
 
-###分离不相关的子问题
+### 分离不相关的子问题
 
 工程师就是将大问题分解为一个个小问题，然后逐个解决，这样也易于保证程序的健壮性、可读性。如何分解子问题，下面给出一些准则：
 
@@ -1116,7 +1118,7 @@ category: blog
         return str + "}";
     };
 
-####意外收获
+#### 意外收获
 
 有很多理由将`format_pretty`抽离出来，这些独立的函数可以很容易的添加feature，增强可靠性，处理边界情况，等等。所以这里，可以将`format_pretty`增强，就会得到一个更强大的函数：
 
@@ -1153,7 +1155,7 @@ category: blog
 
 多做这样的事情，就是积累代码的过程，这样的代码可以复用，也可以形成自己的代码库，或者分享给别人。
 
-####业务相关的函数
+#### 业务相关的函数
 
 那些与目标不相关函数，抽离出来可以复用，与业务相关的也可以抽出来，保持代码的易读性，例如：
 
@@ -1186,7 +1188,7 @@ category: blog
     business.date_created = datetime.datetime.utcnow()
     business.save_to_database()
 
-####简化现有接口
+#### 简化现有接口
 
 我们来看一个读写cookie的函数：
 
@@ -1206,7 +1208,7 @@ category: blog
 
 对于并不理想的接口，你永远可以用自己的函数做封装，让接口更好用。
 
-####按自己需要写接口
+#### 按自己需要写接口
 
     ser_info = { "username": "...", "password": "..." }
     user_str = json.dumps(user_info)
@@ -1231,7 +1233,7 @@ category: blog
 
 分离子函数是好习惯，但是也要适度，过度的分离成多个小函数，也会让查找变得困难。
 
-###单任务
+### 单任务
 
 代码应该是一次只完成一个任务
 
@@ -1299,7 +1301,7 @@ category: blog
     }
     return first_half + ", " + second_half;
 
-###把想法转换成代码
+### 把想法转换成代码
 
 要把一个复杂的东西解释给别人，一些细节很容易就让人产生迷惑，所以想象把你的代码用平实的语言解释给别人听，别人是否能懂，有一些准则可以帮助你让代码更清晰：
 
@@ -1341,7 +1343,7 @@ category: blog
     }
     // continue rendering the page ...
 
-###写更少的代码
+### 写更少的代码
 
 最易懂的代码就是没有代码！
 
@@ -1351,7 +1353,7 @@ category: blog
 <li>熟悉你常用的库，周期性研究他的API</li>
 </ul>
 
-##最后
+## 最后
 
 还有一些与测试相关的章节，留给你自己去研读吧，再次推荐此书：
 

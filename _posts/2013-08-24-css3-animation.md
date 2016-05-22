@@ -4,11 +4,11 @@ title: CSS3动画详解
 description: 随着低版本IE份额下降，以及移动端流量的增长，在项目中也可以大胆使用CSS3动画来增强体验和提高产品的优雅程度，对那些不支持的浏览器也不用再费心去做更多兼容，所以，我们来研究下CSS3动画，到底应该怎么用。
 category: blog
 ---
-##CSS3动画
+## CSS3动画
 
 有人认为CSS动画是做了js的事情，较真起来也算，只是已经抢占许多年了，早些年要实现鼠标滑过链接变色的基本效果，需要动用Java Applet，后来只需给HTML元素加事件`onclick=changecolor()`，再之后正如你所知，只要写`:hover`、`:focus`这样的伪类即可，同样的，现在有了CSS3动画。
 
-####CSS3动画的优势：
+#### CSS3动画的优势：
 <ul>
     <li>写起来非常方便，不会js也没问题</li>
     <li>有些动画js也不能很好的胜任，比如让一个元素在二维、三维空间旋转</li>
@@ -16,13 +16,13 @@ category: blog
     <li>浏览器从底层优化动画序列，例如当tab不可见的时候，降低更新的频率提高整体性能</li>
 </ul>
 
-####劣势：
+#### 劣势：
 <ul>
     <li>CSS3动画应用的范围还是有限</li>
     <li>兼容性：对于增强体验的Feature来说，可以无视</li>
 </ul>
 
-###可以做动画效果的属性
+### 可以做动画效果的属性
 理论上来说，任何单独的CSS属性都可以做动画的效果，比如：
 
 <ul>
@@ -36,7 +36,7 @@ category: blog
 
 你也可以给`red`、`blue`这样的赋值的颜色属性加transition或animation，它会被自动转化为对应的RGB值。
 
-###不可以做动画效果的属性
+### 不可以做动画效果的属性
 
 看下面这些例子：
 
@@ -62,15 +62,16 @@ category: blog
 
 属性从无到有或到不确定值，动画效果不会生效，因为浏览器不知道如何去做，对于元素从无到有，你可以选择`opacity`属性来处理。
 
-##CSS3 Transition
+## CSS3 Transition
 
 Transition是被用到最多的也是最简单的CSS3动画类型。如果要做一个10px宽的蓝色元素在3s后变成一个100px宽的红色元素的效果，Transition可以平滑实现，你只需要声明起始和终止这两个状态。
 
 Transition的触发也很简单，可以用`:hover`、`:focus`这样的伪类来触发，也可以通过改变元素的样式来触发。
 
-###transition的属性
+### transition的属性
 
-####transition-property
+#### transition-property
+
 transition-property用来声明transition会被应用到的属性。
 
     #container p.one {
@@ -87,7 +88,8 @@ transition-property用来声明transition会被应用到的属性。
 
 如果你想应用到所有属性，那可以简单写作`all`，也可以通过`none`来关闭transition。
 
-####transition-duration
+#### transition-duration
+
 transition-duration用来声明动画持续的时长，可以是s也可以是ms
 
     #container p.one {
@@ -98,7 +100,8 @@ transition-duration用来声明动画持续的时长，可以是s也可以是ms
         transition-duration: 3000ms;
     }
 
-####transition-timing-function
+#### transition-timing-function
+
 transition-timing-function声明了动画的缓动类型，有下面几个选项：
 
 <ul>
@@ -111,7 +114,8 @@ transition-timing-function声明了动画的缓动类型，有下面几个选项
 
 最后，还有`cubic-bezier`函数，可以自己创造更多更优美的缓动类型。
 
-####transition-delay
+#### transition-delay
+
 transition-delay声明了动画延迟开始的时间，很容易理解
 
     #container p.one {
@@ -122,7 +126,8 @@ transition-delay声明了动画延迟开始的时间，很容易理解
         transition-delay: 500ms;
     }
 
-###transition简写
+### transition简写
+
 上面介绍了transition的属性，他们也可以合并成一项，省去了许多拼写，当然也别忘记浏览器前缀：
 
     #container p {
@@ -145,9 +150,10 @@ transition-delay声明了动画延迟开始的时间，很容易理解
         color: #00F;
     }
 
-###transition的高级用法
+### transition的高级用法
 
-####不同的transition效果
+#### 不同的transition效果
+
 看这样的例子：
 
     p#animate {
@@ -173,7 +179,8 @@ transition-delay声明了动画延迟开始的时间，很容易理解
         transition: all 3s ease-in-out 0.5s;
     }
 
-####多个transition
+#### 多个transition
+
 需要给多个transition指定不同的效果时，`all`属性解决不了，可以这样写：
 
     p#animate {
@@ -193,7 +200,7 @@ transition-delay声明了动画延迟开始的时间，很容易理解
 
 注意其中的`transition-duration`只写了两个，那么第三个`transition-property`属性`background-color`就用循环到第一个，也就是说他的`transition-duration`值是`1s`。
 
-###transition示例
+### transition示例
 
 <div id="transition1">
 #transition1 {<br>
@@ -212,9 +219,9 @@ transition-delay声明了动画延迟开始的时间，很容易理解
 
 
 
-##CSS3 Animation
+## CSS3 Animation
 
-###Animation和Transition的不同
+### Animation和Transition的不同
 
 <ul>
     <li>和transition一样都可以定义开始和结束状态，但是animation还可以指定更确定的中间状态</li>
@@ -224,7 +231,7 @@ transition-delay声明了动画延迟开始的时间，很容易理解
     <li>animatino写起来稍麻烦些，但是依然比js简单许多</li>
 </ul>
 
-###定义keyframes
+### 定义keyframes
 
     @keyframes colorchange {
         0%   { background-color: #00F; /* from: blue */ }
@@ -244,7 +251,7 @@ transition-delay声明了动画延迟开始的时间，很容易理解
 
 在这个例子中，只是定义了`background-color`这一个属性，如有需要，可以换做其他。对于`0%`这个也可以用`from`关键字来替代，同样的可以用`to`来代替`100%`，过渡状态，你可以定义任何百分比，类似`12.5%`这样的也可以，不过就不用给自己找麻烦了吧。浏览器的`prefix`也不能少。
 
-###应用到元素
+### 应用到元素
 将`animation`应用到元素的属性写法，和`transition`差不太多，顺序都一致，就不在一个个参数重复说明，直接看代码吧：
 
     #myelement {
@@ -273,14 +280,15 @@ animation-direction有四个值：
     <li><code>alternate-reverse</code>与<code>alternate</code>一致，不过是从100%开始</li>
 </ul>
 
-###Animation示例
+### Animation示例
 <div id="ani1">Animate color</div>
 
 
-##CSS3 Transform
+## CSS3 Transform
+
 有了`transition`和`animation`之后，就可以做出些漂亮的动画效果，如果再搭配`transform`这一CSS3动画利器，就更出彩了。
 
-###CSS3 2D Transform
+### CSS3 2D Transform
 
 运用CSS3 2D Transform的技术，可以更自由轻松的来修饰HTML元素。CSS3 2D Transform的基本方法有下面这些：
 
@@ -292,7 +300,8 @@ animation-direction有四个值：
     <li><code>matrix()</code></li>
 </ul>
 
-####Translate
+#### Translate
+
 使用`translate()`方法，可以将HTML元素在x-y轴平面上做位移，且不会影响到其他元素。
 
     div{
@@ -309,7 +318,7 @@ animation-direction有四个值：
 <div id="trans-inner2">transform:tranlated(40px, 40px)</div>
 </div>
 
-####Rotate
+#### Rotate
 
 `rotate()`方法可以将元素按照时钟方向旋转，参数可以是`0deg`到`360deg`，也是在x-y轴平面，示例如下：
 
@@ -318,7 +327,7 @@ animation-direction有四个值：
 <div id="rota-inner2">transform:rotate(-30deg)</div>
 </div>
 
-####Scale
+#### Scale
 和名字的一样，`scale()`方法用来放大一个元素，依然是在x-y轴平面，看示例：
 
 <div id="scale1">
@@ -326,7 +335,7 @@ animation-direction有四个值：
     <div id="sca-inner2">transform:scale(1.5,1.3)</div>
 </div>
 
-####Skew
+#### Skew
 `skew()`方法可以将元素按照指定参数进行扭曲，你需要指定x、y轴的扭曲角度，看示例：
 
 <div id="skew1">
@@ -334,7 +343,7 @@ animation-direction有四个值：
 <div id="sk-inner2">transform:skew(30deg,0)</div>
 </div>
 
-####Matrix
+#### Matrix
 `matrix()`方法是以上所有2D效果的方法的总和，写法如下：
 
     div{
@@ -344,7 +353,7 @@ animation-direction有四个值：
 本质上`scale`、`skew`、`rotate`、`translate`的效果都是通过`matrix`实现的，`tx`、`ty`表示位移量，关于`matrix`方法更详细的介绍可以参考这里：[理解CSS3 transform中的Matrix(矩阵)](http://www.zhangxinxu.com/wordpress/2012/06/css3-transform-matrix-%E7%9F%A9%E9%98%B5/)
 
 
-###CSS3 3D Transform
+### CSS3 3D Transform
 了解了2D Transform之后，3D Transform的概念也不会太难，他给HTML元素在x-y平面加上了z轴，我们一个个来看看：
 
 <ul>
@@ -398,7 +407,8 @@ transform: rotateZ(45deg);
 
 任何有3D变换的元素，不论最后只是做了2D的变换，或者什么都没做`translate3d(0,0,0)`，都会触发浏览器去计算。不过，以后会更新优化也不一定。
 
-###Perspective
+### Perspective
+
 激活元素的3D空间，需要`perspective`属性，写法有两种：
 
     transform: perspective( 600px );
@@ -449,7 +459,8 @@ transform: rotateZ(45deg);
 
 `perspective`的参数值，决定了3D效果的强烈程度，可以想象为距离多远去观察元素。值越大，观察距离就越远，同样的旋转值，看起来效果就弱一些；值越小，距离越近，3D效果就更强烈。
 
-####perspective-orgin
+#### perspective-orgin
+
 通常，对一个元素进行3D变换的时候，变换点都是元素的中心点，如果你想以其他的位置为变换点，那就可以用这个属性来做调整：
 
     perspective-orgin: 20% 70%;
@@ -474,20 +485,23 @@ transform: rotateZ(45deg);
 </div>
 </div>
 
-####transform-style
+#### transform-style
+
 这个参数用来共享父元素的3D空间，这样说起来有些抽象，下面第一个翻卡片的例子中会讲到。
 
-####backface-visibility
+#### backface-visibility
+
 backface-visibility 属性可用于隐藏内容的背面。默认情况下，背面可见，这意味着即使在翻转后，变换的内容仍然可见。但当 backface-visibility 设置为 hidden 时，旋转后内容将隐藏，因为旋转后正面将不再可见。该功能可帮助你模拟多面的对象，例如下例中使用的卡片。通过将 backface-visibility 设置为 hidden，可以确保只有正面可见。
 
 
 
 
-##CSS3 动画实例
+## CSS3 动画实例
 
 下面例子中的代码，为了方便查看都没有写浏览器前缀，也没有加入其他的修饰属性，所以实际应用时，不要忘记哦，当然也可以直接console查看。
 
-###CSS3 翻纸牌
+### CSS3 翻纸牌
+
 做一个翻纸牌的效果，结构很简单：
 
     <div id="cardflip">
@@ -572,7 +586,8 @@ backface-visibility 属性可用于隐藏内容的背面。默认情况下，背
 
 这里有一点需要注意，当元素在z轴上有了位移，或者朝向负角度旋转，会导致元素在页面上无法被鼠标点击到，想像一下3D空间，这个元素已经位于整个页面平面的**里面**，所以无法触及了。
 
-###CSS3 立方体
+### CSS3 立方体
+
 做完了反转卡片的效果，肯定还想做更炫的，来试试做一个立方体吧：
 
     <section id="cube-con">
@@ -657,7 +672,8 @@ backface-visibility 属性可用于隐藏内容的背面。默认情况下，背
 </div>
 
 
-###3D 旋转跑马灯
+### 3D 旋转跑马灯
+
 做幻灯片展示的方法有很多，我们用CSS3的3D技术来试试看：
 
     <section class="container">
@@ -789,7 +805,8 @@ js代码如下：
 <button id="car-next">Next &gt;</button>
 </div>
 
-##结语
+## 结语
+
 终于完成了这篇，梳理的过程对我自己很有提高，希望对你也能有些帮助，有兴趣可以关注我，期待下以后的博客~
 
 <link rel="stylesheet" href="/css/css3-ani.css">

@@ -5,7 +5,8 @@ description: 没有合适的插件，就只好自己动手了，同时也用Back
 category: blog
 ---
 
-##开始之前
+## 开始之前
+
 在Web Store上没找到满意的便签插件，就只好自己动手写了[Notty Notes][Notty]，你可以试试看，多多提建议哦~
 <a href="https://chrome.google.com/webstore/detail/notty-notes/ggbmjahbkbhakkfgjiggdclpmmpmhajn?hl=zh-CN" title="Notty Notes" target="_blank"><img src="/images/backbonechrome/notes-logo.jpg" alt="Notty Notes"></a>
 
@@ -13,7 +14,8 @@ category: blog
 
 [Chrome][3]的美丽与Backbone有相同之处。他的插件开发流程令人愉悦，[Chrome Web Store][4]上展现率和安装率也挺让人安慰，那丁点的热情也不会被打消掉。所以，综合种种，我又结合Backbone.js的使用，总结出来这片Blog。
 
-##Backbone.js简介
+## Backbone.js简介
+
 >Backbone.js gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.
 
 这是官方的介绍，Backbone.js给web应用开发约定了一种结构，包括用key-value绑定且可以自定义事件的Models，提供大量API方法的Models的集合Collections，以及用来响应事件的Views，并把这些很好的与你的RESTful的Json接口相结合，有效的组织复杂应用的代码。Backbone.js基于[jQuery][10]和[Underscore][11]。
@@ -22,7 +24,8 @@ Backbone算轻量级的MVC框架，他的优雅之处在于，他为复杂的代
 
 相对于基本的HTML页面，Backbone.js的更适用于单页复杂应用(Single Page Application)。什么是单页复杂应用，比如Gmail、Google Reader、阿尔法城等，当然包括我将要讨论的便签插件。
 
-##Notes页面准备
+## Notes页面准备
+
 便签是很直观、简单的东西，设计思路基本上模拟真实物品，所以也没多费神，实现的结果就是这样子的：
 ![Notes Draft](/images/backbonechrome/notes-draft.jpg)
 
@@ -71,10 +74,11 @@ Backbone算轻量级的MVC框架，他的优雅之处在于，他为复杂的代
 
 页面的部分不是这篇博客的重点，就像平常开发一样。在做这个完全我自己设计开发的东西的过程中，体会到想达到很优雅的用户体验，需要关注和解决的问题很多，是一个非常考验耐心的事情，不过最终完成时候的成就感自然也不同啦。
 
-##Backbone.js的Model
+## Backbone.js的Model
+
 Model就是要操作对象的数据结构，存储需要用到的数据，基于这些数据，会有大量的交互、验证等等操作。
 
-###Model声明
+### Model声明
 
 根据要做的便签的需要，数据结构定义为如下：
 
@@ -103,7 +107,7 @@ Model就是要操作对象的数据结构，存储需要用到的数据，基于
 
 可以看到，我们定义了Note的Model的默认值，还有initialize和remove方法，当new一个Note对象时候，initialize方法会执行，默认的值也会赋给new的对象。
 
-###Model值的set方法
+### Model值的set方法
 
 也可以在new的时候修改覆盖默认值：
 
@@ -112,14 +116,14 @@ Model就是要操作对象的数据结构，存储需要用到的数据，基于
     var note2 = new Note();
     note2.set({title:'New Note 2',content:'This is the new note 2'}); //设置Model的值
 
-###Model值的get方法
+### Model值的get方法
 
     var note3 = new Note();
     note3.set({title:'New Note 3',content:'This is the new note 3'}); //设置Model的值
 
     var title = note3.get('title'); // "New Note 3"
 
-###监听Model的change事件
+### 监听Model的change事件
 
 要监听change事件，可以在initialize方法中做，也可以在实例化之后做：
 
@@ -134,7 +138,7 @@ Model就是要操作对象的数据结构，存储需要用到的数据，基于
         //some code...
     });
 
-###与服务端的交互
+### 与服务端的交互
 
 在这个应用中，无需与服务端交互，用了那个localStorage的补充插件之后，同样调用save()和destory()方法就好，该插件会自动完成相应的工作，真正与服务端的交互也很简单：
 
@@ -232,7 +236,7 @@ Model还支持validate方法，可以对数据进行校验，校验不通过，�
         }
     });
 
-##Backbone.js的Collection
+## Backbone.js的Collection
 Collection的概念很好理解，他就是Model的一个简单集合，举几个例子：
 
 - Model是歌，Collection是专辑
@@ -255,7 +259,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 
 需要注意的是，我们的便签插件不需要与服务端交互，但是需要本地存储，所以使用localStorage。
 
-##Backbone.js的View
+## Backbone.js的View
 好了，重头来了，View的声明和其他的基本上一样，一些参数查文档就很容易明白：
 
     var NoteView = Backbone.View.extend({
@@ -297,7 +301,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 
 在这个应用中，分离了每个便签的View和整个app的View，这样做的好处是逻辑、代码更清晰。
 
-###el属性
+### el属性
 
 `this.el`是这个View的DOM引用，使用它可以方便的做很多操作DOM的事情。注意到在这个View的声明里面，定义了template函数，不适用Underscore自带的template的函数的原因是Chrome Manifest V2的版本里面不允许出现`new Function`，导致很多模板库不能使用，只好自己重写一个简单的。`template`在这个场景还是能非常方便的解决一些问题的。
 
@@ -329,7 +333,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 
 在`initialize`方法中，可以初始化这些事情，需要更多的初始化工作，继续写写下去就好。
 
-###事件的监听
+### 事件的监听
 
 你肯定注意到了声明View代码中的下面这些：
 
@@ -345,7 +349,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 
 这些用来给View绑定事件，就和平常使用jQuery一样的用法，相信你一看就明白。
 
-###appView
+### appView
 
 `appView`并不是Backbone的内容，而是在这个应用中，我们用来粘合所有元素的一个容器，为了将整个流程串联起来，有一个总体的概念，我会详细解释这部分的代码：
 
@@ -420,7 +424,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 
 注释很详细，也不用再赘述了。
 
-##Backbone.js更多资源
+## Backbone.js更多资源
 基本上到这里，使用Backbone.js整体的框架已经搭建好了，剩下的就是填充血肉了，这里面充满了细节，写的过程中慢慢体会、完善。再提供几个比较好的资源，以及这个插件的源码地址：
 
 - [Notty Notes源码][19]
@@ -433,10 +437,10 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 - [Backbone 初探][24]
 - [Backbone has made me a better programmer][25]
 
-##Chrome插件
+## Chrome插件
 Chrome插件开发的流程很舒适、自然。为了先配好环境，就先大致的介绍一下插件开发的相关事宜。如果比较熟悉，可忽略跳过。更详细全面的说明参考[官方文档][5]。
 
-###manifest.json
+### manifest.json
 
 每一个插件的`manifest.json`文件必不可少，看看[Notty Notes][Notty]，也就是我们要写的插件的`manifest.json`的内容吧：
 
@@ -484,7 +488,7 @@ Chrome插件开发的流程很舒适、自然。为了先配好环境，就先�
 
 `permissions`项是向Chrome请求需要的权限，在用户安装插件额时候，会有提示，可声明的权限可以参考[Permissions][9]。
 
-###开发调试
+### 开发调试
 
 关于文件的组织，除了`manifest.json`文件需要放在根目录之外，其他文件放在`manifest`中指定的位置即可，不得不说，很愉悦。
 
@@ -492,15 +496,15 @@ Chrome插件开发的流程很舒适、自然。为了先配好环境，就先�
 
 做完准备工作，余下的开发过程就同平常一样，修改代码，刷新，看效果，调BUG，毫无不适。
 
-##Chrome Web Store
+## Chrome Web Store
 
-###账号注册
+### 账号注册
 
 [Chrome Web Store][4]在早起测试阶段，可以免费注册使用，现在注册一个可发布应用的账号需要支付5美元的费用，而且得是信用卡，之前一直没办信用卡，所以写了的插件只能自己打包发布管理，异常的纷杂，办信用卡之后，第一件事就是注册Chrome Web Store。
 
 需要注意的一点是，填写地址部分，没有中国大陆的选项，不知道Google会不会检查信用卡发卡地和地址是否匹配，我选择了香港，瞎填了地址，也通过了，仅供参考。
 
-###发布、推广
+### 发布、推广
 Chrome Store上插件的发布很简单，把自己的插件按要求打包好，上传即可，介绍写的简洁动人一些，准备几个漂亮的图标，再做几张符合尺寸要求的宣传图，发布之后，很快就能生效在相关的分类里面看到。吐槽一下，我的宣传图上传好几天了，也没见通过审核的迹象，效率啊XD。
 
 最后再广告一下我的[便签插件][Notty]吧，感谢[靖哥哥][26]帮我做宣传图：
