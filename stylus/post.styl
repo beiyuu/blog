@@ -1,0 +1,128 @@
+.body-post
+  background: #f5f5f5
+  @media $mobile
+    background: #fff
+
+.post-wrapper
+  width: 900px
+  margin: 0 auto
+  background: #fff
+  padding: 80px 60px
+  @media $mobile
+    width: 85%
+    margin: 100px auto 50px
+    padding: 0
+
+  .post-title,
+  .post-title a
+    font-size: 30px
+    font-weight: bold
+    margin-bottom: 6px
+    color: #000
+    text-align: center
+    word-wrap: break-word
+    @media $mobile
+      font-size: 24px
+    &:hover
+      text-decoration: none
+
+  .post-date
+    text-align: center
+    color: #999
+    margin-bottom:60px
+    font-size: 14px
+    @media $mobile
+      margin-bottom: 40px
+
+  h2
+    font-size:22px
+    font-weight:bold
+    margin-bottom:25px
+    border-bottom: 2px solid #eee
+    padding-bottom: 10px
+    @media $mobiel
+      font-size: 20px
+
+  h3
+    font-size: 18px
+    font-weight: bold
+    margin-bottom: 25px
+    color: #222
+    @media $mobile
+      font-size: 16px
+
+  h4, h5, h6
+    color: #333
+    font-weight: bold
+    margin-bottom: 15px
+
+  p
+    margin-bottom: 40px
+    line-height: 1.8em
+
+  code
+    background: #eee
+    border: 1px solid #ccc
+    padding: 0 5px
+    font-family: "Courier";line-height:14px;font-size:14px;word-wrap:break-word
+
+  pre
+    background: #f7f3f7
+    padding: 20px 30px 15px
+    overflow: auto
+    margin-bottom: 40px
+    font-size: 14px
+    border: 1px solid #eee
+    color: #b9bdb6
+    margin-top: -20px
+
+    code
+      background-color: transparent
+      border: none
+      padding: 0
+      word-wrap: normal
+      @media $mobile
+        line-height: 1em
+        font-size: 12px
+
+  h4+pre,
+  h3+pre
+    margin-top: 20px
+
+  ul
+    margin-bottom: 25px
+    margin-left: 25px
+    li
+      margin-bottom: 5px
+      list-style: disc
+      line-height: 1.8em
+
+  p + ul
+    margin-top: -20px
+
+
+  ol
+    margin-bottom: 25px
+    margin-left: 25px
+    li
+      margin-bottom: 5px
+      list-style: decimal
+      line-height: 1.1em
+      @media $mobile
+        margin-bottom: 0
+        line-height: 1em
+
+  blockquote
+    margin-left: 25px
+    font-size: 14px
+    font-style: italic
+
+  img
+    max-width: 670px
+    display: block
+    margin: 10px auto
+    @media $mobile
+      max-width: 90%
+
+  table
+    margin: 0 auto

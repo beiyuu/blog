@@ -1,0 +1,30 @@
+global-reset()
+reset-html5()
+
+*
+  box-sizing(border-box)
+
+*:before,
+*:after
+  box-sizing(border-box)
+
+// android no highlight
+*{-webkit-tap-highlight-color: rgba(0,0,0,0);}
+
+body
+  font-family: Helvetica, Tahoma, Arial, 'Hiragino Sans GB', '\51AC\9752\9ED1\4F53', 'Microsoft YaHei','\5FAE\8F6F\96C5\9ED1', STXihei, '\534E\6587\7EC6\9ED1', SimSun, '\5B8B\4F53', Heiti, '\9ED1\4F53', sans-serif
+  font-size: 16px
+  @media $mobile
+    font-size: 14px
+
+a
+  color:#4A75B5
+  text-decoration:none
+  outline:none
+  &:hover
+    text-decoration:underline
+  &.external
+    padding-right:13px
+    background:url('/images/icons.gif') no-repeat right 1px
+    &:hover
+      background-position:right -15px
