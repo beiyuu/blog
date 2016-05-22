@@ -38,9 +38,10 @@ category: blog
      make -> create,set up, build, generate, compose, add, new
 
 ####避免通用的词
+
 像`tmp`和`retval`这样词，除了说明是临时变量和返回值之外，没有任何意义。但是给他加一些有意义的词，就会很明确：
 
-    tmp_file = tempfile.NamedTemporaryFile() 
+    tmp_file = tempfile.NamedTemporaryFile()
     ...
     SaveData(tmp_file, ...)
 
@@ -62,11 +63,13 @@ category: blog
 所以，当使用一些通用的词，要有充分的理由才可以。
 
 ####使用具体的名字
+
 `CanListenOnPort`就比`ServerCanStart`好，can start比较含糊，而listen on port确切的说明了这个方法将要做什么。
 
 `--run_locally`就不如`--extra_logging`来的明确。
 
 ####增加重要的细节，比如变量的单位`_ms`，对原始字符串加`_raw`
+
 如果一个变量很重要，那么在名字上多加一些额外的字就会更加易读，比如将`string id; // Example: "af84ef845cd8"`换成`string hex_id;`。
 
                  Start(int delay)  -->  delay → delay_secs
@@ -82,6 +85,7 @@ category: blog
         data  ->  data_urlenc
 
 ####对于作用域大的变量使用较长的名字
+
 在比较小的作用域内，可以使用较短的变量名，在较大的作用域内使用的变量，最好用长一点的名字，编辑器的自动补全都可以很好的减少键盘输入。对于一些缩写前缀，尽量选择众所周知的(如str)，一个判断标准是，当新成员加入时，是否可以无需他人帮助而明白前缀代表什么。
 
 ####合理使用`_`、`-`等符号，比如对私有变量加`_`前缀。
@@ -96,6 +100,7 @@ category: blog
     <div id="middle_column" class="main-content"> ...
 
 ###命名不能有歧义
+
 命名的时候可以先想一下，我要用的这个词是否有别的含义。举个例子：
 
     results = Database.all_objects.filter("year <= 2011")
@@ -153,6 +158,7 @@ category: blog
 在这个例子中，`getMean`方法遍历了所有的样本，返回总额，所以并不是普通意义上轻量的`get`方法，所以应该取名`computeMean`比较合适。
 
 ##漂亮的格式
+
 写出来漂亮的格式，充满美感，读起来自然也会舒服很多，对比下面两个例子：
 
     class StatsKeeper {
@@ -184,6 +190,7 @@ category: blog
     };
 
 ###考虑断行的连续性和简洁
+
 这段代码需要断行，来满足不超过一行80个字符的要求，参数也需要注释说明：
 
     public class PerformanceTester {
@@ -282,6 +289,7 @@ category: blog
     }
 
 ###列对齐
+
 列对齐可以让代码段看起来更舒适：
 
     CheckFullName("Doug Adams"   , "Mr. Douglas Adams" , "");
@@ -379,7 +387,9 @@ category: blog
 当你写代码的时候，你会思考很多，但是最终呈现给读者的就只剩代码本身了，额外的信息丢失了，所以注释的目的就是让读者了解更多的信息。
 
 ###应该注释什么
+
 ####不应该注释什么
+
 这样的注释毫无价值：
 
     // The class definition for Account
@@ -403,15 +413,16 @@ category: blog
 ####不要给烂取名注释
 
     // Enforce limits on the Reply as stated in the Request,
-    // such as the number of items returned, or total byte size, etc. 
+    // such as the number of items returned, or total byte size, etc.
     void CleanReply(Request request, Reply reply);
 
 注释的大部分都在解释clean是什么意思，那不如换个正确的名字：
 
-    // Make sure 'reply' meets the count/byte/etc. limits from the 'request' 
+    // Make sure 'reply' meets the count/byte/etc. limits from the 'request'
     void EnforceLimitsFromRequest(Request request, Reply reply);
 
 ####记录你的想法
+
 我们讨论了不该注释什么，那么应该注释什么呢？注释应该记录你思考代码怎么写的结果，比如像下面这些：
 
     // Surprisingly, a binary tree was 40% faster than a hash table for this data.
@@ -446,7 +457,7 @@ category: blog
         vector<float> data;
         ...
         void Clear() {
-            vector<float>().swap(data); // Huh? Why not just data.clear()? 
+            vector<float>().swap(data); // Huh? Why not just data.clear()?
         }
     };
 
@@ -456,6 +467,7 @@ category: blog
     vector<float>().swap(data);
 
 ####说明可能陷阱
+
 你在写代码的过程中，可能用到一些hack，或者有其他需要读代码的人知道的陷阱，这时候就应该注释：
 
     void SendEmail(string to, string subject, string body);
@@ -466,12 +478,14 @@ category: blog
     void SendEmail(string to, string subject, string body);
 
 ####全景的注释
+
 有时候为了更清楚说明，需要给整个文件加注释，让读者有个总体的概念：
 
     // This file contains helper functions that provide a more convenient interface to our
     // file system. It handles file permissions and other nitty-gritty details.
 
 ####总结性的注释
+
 即使是在函数内部，也可以有类似文件注释那样的说明注释：
 
     # Find all the items that customers purchased for themselves.
@@ -493,6 +507,7 @@ category: blog
 很多人不愿意写注释，确实，要写好注释也不是一件简单的事情，也可以在文件专门的地方，留个写注释的区域，可以写下你任何想说的东西。
 
 ###注释应简明准确
+
 前一个小节讨论了注释应该写什么，这一节来讨论应该怎么写，因为注释很重要，所以要写的精确，注释也占据屏幕空间，所以要简洁。
 
 ####精简注释
@@ -565,7 +580,7 @@ category: blog
         for (list<Product>::reverse_iterator it = products.rbegin(); it != products.rend();
                 ++it)
             DisplayPrice(it->price);
-        ... 
+        ...
     }
 
 这里的注释说明了倒序排列，单还不够准确，应该改成这样：
@@ -574,6 +589,7 @@ category: blog
     for (list<Product>::reverse_iterator it = products.rbegin(); ... )
 
 ####函数调用时的注释
+
 看见这样的一个函数调用，肯定会一头雾水：
 
     Connect(10, false);
@@ -585,7 +601,7 @@ category: blog
     # Call the function using named parameters
     Connect(timeout = 10, use_encryption = False)
 
-####使用信息含量丰富的词 
+####使用信息含量丰富的词
 
     // This class contains a number of members that store the same information as in the
     // database, but are stored here for speed. When this class is read from later, those
@@ -600,9 +616,11 @@ category: blog
 ##简化循环和逻辑
 
 ###流程控制要简单
+
 让条件语句、循环以及其他控制流程的代码尽可能自然，让读者在阅读过程中不需要停顿思考或者在回头查找，是这一节的目的。
 
 ####条件语句中参数的位置
+
 对比下面两种条件的写法：
 
     if (length >= 10)
@@ -621,6 +639,7 @@ category: blog
 这就解释了为什么`bytes_received < bytes_expected`比反过来更好理解。
 
 ####if/else的顺序
+
 通常，`if/else`的顺序你可以自由选择，下面这两种都可以：
 
     if (a == b) {
@@ -650,7 +669,7 @@ category: blog
         for (int i = 0; i < items.size(); i++) {
             items[i].Expand();
         }
-        ... 
+        ...
     }
 
 看到`if`你首先想到的是`expand_all`，就好像告诉你“不要想大象”，你会忍不住去想它，所以产生了一点点迷惑，最好写成：
@@ -659,16 +678,16 @@ category: blog
         for (int i = 0; i < items.size(); i++) {
             items[i].Expand();
         }
-        ... 
+        ...
     } else {
         response.Render(items);
-        ... 
+        ...
     }
 
 ####三目运算符(?:)
 
     time_str += (hour >= 12) ? "pm" : "am";
-    
+
     Avoiding the ternary operator, you might write:
         if (hour >= 12) {
             time_str += "pm";
@@ -755,19 +774,20 @@ category: blog
 
         if (results[i]->name == "") continue;
         cout << "Considering candidate..." << endl;
-        ... 
+        ...
     }
 
 ###拆分复杂表达式
 很显然的，越复杂的表达式，读起来越费劲，所以应该把那些复杂而庞大的表达式，拆分成一个个易于理解的小式子。
 
 ####用变量
+
 将复杂表达式拆分最简单的办法，就是增加一个变量：
 
     if line.split(':')[0].strip() == "root":
 
     //用变量替换
-    username = line.split(':')[0].strip() 
+    username = line.split(':')[0].strip()
     if username == "root":
         ...
 
@@ -793,7 +813,7 @@ category: blog
 
 ####逻辑替换
 
-- 1) not (a or b or c)   <--> (not a) and (not b) and (not c) 
+- 1) not (a or b or c)   <--> (not a) and (not b) and (not c)
 - 2) not (a and b and c) <--> (not a) or (not b) or (not c)
 
 所以，就可以这样写：
@@ -855,6 +875,7 @@ category: blog
 ###变量与可读性
 
 ####消除变量
+
 前一节，讲到利用变量来拆解大表达式，这一节来讨论如何消除多余的变量。
 
 ####没用的临时变量
@@ -881,7 +902,7 @@ category: blog
         ...
         if (...) {
             done = true;
-            continue; 
+            continue;
         }
     }
 
@@ -891,12 +912,13 @@ category: blog
         ...
         if (...) {
             break;
-        } 
+        }
     }
 
 这个例子非常容易修改，如果是比较复杂的嵌套，`break`可能并不够用，这时候就可以把代码封装到函数中。
 
 ####减少变量的作用域
+
 我们都听过要避免使用全局变量这样的忠告，是的，当变量的作用域越大，就越难追踪，所以要保持变量小的作用域。
 
     class LargeClass {
@@ -908,7 +930,7 @@ category: blog
         void Method2() {
             // Uses str_
         }
-        // Lots of other methods that don't use str_ 
+        // Lots of other methods that don't use str_
         ... ;
     }
 
@@ -917,7 +939,7 @@ category: blog
     class LargeClass {
         void Method1() {
             string str = ...;
-            Method2(str); 
+            Method2(str);
         }
         void Method2(string str) {
             // Uses str
@@ -933,7 +955,7 @@ category: blog
     if request:
         for value in request.values:
         if value > 0:
-            example_value = value 
+            example_value = value
             break
 
     for logger in debug.loggers:
@@ -944,7 +966,7 @@ category: blog
     example_value = None
     if request:
         for value in request.values:
-            if value > 0: example_value = value 
+            if value > 0: example_value = value
             break
 
     if example_value:
@@ -964,11 +986,12 @@ category: blog
                     break
 
 ####用到了再声明
+
 在C语言中，要求将所有的变量事先声明，这样当用到变量较多时候，读者处理这些信息就会有难度，所以一开始没用到的变量，就暂缓声明：
 
     def ViewFilteredReplies(original_id):
         filtered_replies = []
-        root_message = Messages.objects.get(original_id) 
+        root_message = Messages.objects.get(original_id)
         all_replies = Messages.objects.select(root_id=original_id)
         root_message.view_count += 1
         root_message.last_view_time = datetime.datetime.now()
@@ -988,7 +1011,7 @@ category: blog
         root_message.last_view_time = datetime.datetime.now()
         root_message.save()
 
-        all_replies = Messages.objects.select(root_id=original_id) 
+        all_replies = Messages.objects.select(root_id=original_id)
         filtered_replies = []
         for reply in all_replies:
             if reply.spam_votes <= MAX_SPAM_VOTES:
@@ -997,9 +1020,11 @@ category: blog
         return filtered_replies
 
 ####变量最好只写一次
+
 前面讨论了过多的变量会让读者迷惑，同一个变量，不停的被赋值也会让读者头晕，如果变量变化的次数少一些，代码可读性就更强。
 
 ####一个例子
+
 假设有一个页面，如下，需要给第一个空的`input`赋值：
 
     <input type="text" id="input1" value="Dustin">
@@ -1014,7 +1039,7 @@ category: blog
         while (elem !== null) {
             if (elem.value === '') {
                 found = true;
-                break; 
+                break;
             }
             i++;
             elem = document.getElementById('input' + i);
@@ -1055,7 +1080,9 @@ category: blog
 
 
 ##重新组织你的代码
+
 ###分离不相关的子问题
+
 工程师就是将大问题分解为一个个小问题，然后逐个解决，这样也易于保证程序的健壮性、可读性。如何分解子问题，下面给出一些准则：
 
 <ul>
@@ -1090,6 +1117,7 @@ category: blog
     };
 
 ####意外收获
+
 有很多理由将`format_pretty`抽离出来，这些独立的函数可以很容易的添加feature，增强可靠性，处理边界情况，等等。所以这里，可以将`format_pretty`增强，就会得到一个更强大的函数：
 
     var format_pretty = function (obj, indent) {
@@ -1126,18 +1154,19 @@ category: blog
 多做这样的事情，就是积累代码的过程，这样的代码可以复用，也可以形成自己的代码库，或者分享给别人。
 
 ####业务相关的函数
+
 那些与目标不相关函数，抽离出来可以复用，与业务相关的也可以抽出来，保持代码的易读性，例如：
 
     business = Business()
     business.name = request.POST["name"]
 
     url_path_name = business.name.lower()
-    url_path_name = re.sub(r"['\.]", "", url_path_name) 
-    url_path_name = re.sub(r"[^a-z0-9]+", "-", url_path_name) 
+    url_path_name = re.sub(r"['\.]", "", url_path_name)
+    url_path_name = re.sub(r"[^a-z0-9]+", "-", url_path_name)
     url_path_name = url_path_name.strip("-")
     business.url = "/biz/" + url_path_name
 
-    business.date_created = datetime.datetime.utcnow() 
+    business.date_created = datetime.datetime.utcnow()
     business.save_to_database()
 
 抽离出来，就好看很多：
@@ -1147,17 +1176,18 @@ category: blog
 
     def make_url_friendly(text):
         text = text.lower()
-        text = CHARS_TO_REMOVE.sub('', text) 
-        text = CHARS_TO_DASH.sub('-', text) 
+        text = CHARS_TO_REMOVE.sub('', text)
+        text = CHARS_TO_DASH.sub('-', text)
         return text.strip("-")
 
     business = Business()
     business.name = request.POST["name"]
-    business.url = "/biz/" + make_url_friendly(business.name) 
-    business.date_created = datetime.datetime.utcnow() 
+    business.url = "/biz/" + make_url_friendly(business.name)
+    business.date_created = datetime.datetime.utcnow()
     business.save_to_database()
 
 ####简化现有接口
+
 我们来看一个读写cookie的函数：
 
     var max_results;
@@ -1202,6 +1232,7 @@ category: blog
 分离子函数是好习惯，但是也要适度，过度的分离成多个小函数，也会让查找变得困难。
 
 ###单任务
+
 代码应该是一次只完成一个任务
 
     var place = location_info["LocalityName"];  // e.g. "Santa Monica"
@@ -1233,23 +1264,23 @@ category: blog
 
     // Start with the default, and keep overwriting with the most specific value. var second_half = "Planet Earth";
     if (country) {
-        second_half = country; 
+        second_half = country;
     }
     if (state && country === "USA") {
-        second_half = state; 
+        second_half = state;
     }
 
 再来解决前半部分：
 
     var first_half = "Middle-of-Nowhere";
     if (state && country !== "USA") {
-        first_half = state; 
+        first_half = state;
     }
     if (city) {
         first_half = city;
     }
     if (town) {
-        first_half = town; 
+        first_half = town;
     }
 
 大功告成：
@@ -1269,6 +1300,7 @@ category: blog
     return first_half + ", " + second_half;
 
 ###把想法转换成代码
+
 要把一个复杂的东西解释给别人，一些细节很容易就让人产生迷惑，所以想象把你的代码用平实的语言解释给别人听，别人是否能懂，有一些准则可以帮助你让代码更清晰：
 
 <ul>
@@ -1287,7 +1319,7 @@ category: blog
     } else {
         if (!$is_admin) {
             return not_authorized();
-        } 
+        }
     }
     // continue rendering the page ...
 
@@ -1310,6 +1342,7 @@ category: blog
     // continue rendering the page ...
 
 ###写更少的代码
+
 最易懂的代码就是没有代码！
 
 <ul>
@@ -1319,6 +1352,7 @@ category: blog
 </ul>
 
 ##最后
+
 还有一些与测试相关的章节，留给你自己去研读吧，再次推荐此书：
 
 - 英文版：[《The Art of Readable Code》][RCEN]

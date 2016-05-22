@@ -4,7 +4,6 @@ title: CSS3动画详解
 description: 随着低版本IE份额下降，以及移动端流量的增长，在项目中也可以大胆使用CSS3动画来增强体验和提高产品的优雅程度，对那些不支持的浏览器也不用再费心去做更多兼容，所以，我们来研究下CSS3动画，到底应该怎么用。
 category: blog
 ---
-
 ##CSS3动画
 
 有人认为CSS动画是做了js的事情，较真起来也算，只是已经抢占许多年了，早些年要实现鼠标滑过链接变色的基本效果，需要动用Java Applet，后来只需给HTML元素加事件`onclick=changecolor()`，再之后正如你所知，只要写`:hover`、`:focus`这样的伪类即可，同样的，现在有了CSS3动画。
@@ -214,6 +213,7 @@ transition-delay声明了动画延迟开始的时间，很容易理解
 
 
 ##CSS3 Animation
+
 ###Animation和Transition的不同
 
 <ul>
@@ -455,20 +455,22 @@ transform: rotateZ(45deg);
     perspective-orgin: 20% 70%;
 
 这个是默认值的`perspective-orign:50% 50%`：
+
 <div id="transform1">
 <div class="inner">
-<img src="http://lorempixel.com/150/150/city" alt="Nature">
-<img src="http://lorempixel.com/150/150/food" alt="Nature">
-<img src="http://lorempixel.com/150/150/people" alt="Nature">
+<img src="http://placekitten.com/150/150" alt="Nature">
+<img src="http://placekitten.com/150/150" alt="Nature">
+<img src="http://placekitten.com/150/150" alt="Nature">
 </div>
 </div>
 
 这个是`perspective-orgin: 0% 50%;`
+
 <div id="transform1" sytle="-webkit-perspective-origin:0% 50%;perspective-origin:0% 50%">
 <div class="inner">
-<img src="http://lorempixel.com/150/150/nature" alt="Nature">
-<img src="http://lorempixel.com/150/150/animals" alt="Nature">
-<img src="http://lorempixel.com/150/150/abstract" alt="Nature">
+<img src="http://placekitten.com/150/150" alt="Nature">
+<img src="http://placekitten.com/150/150" alt="Nature">
+<img src="http://placekitten.com/150/150" alt="Nature">
 </div>
 </div>
 
@@ -633,6 +635,7 @@ backface-visibility 属性可用于隐藏内容的背面。默认情况下，背
     /**还有过渡效果**/
     #cube { transition: transform 1s; }
 
+
 <section id="cube-con">
 <div id="cube">
 <figure class="front">1</figure>
@@ -733,10 +736,11 @@ backface-visibility 属性可用于隐藏内容的背面。默认情况下，背
 
 知道了计算方法，如果要改变卡片的个数，或者宽度，只要按照那个公式再计算就好：
 
-    var tz = Math.round( ( panelSize / 2 ) / 
+    var tz = Math.round( ( panelSize / 2 ) /
       Math.tan( ( ( Math.PI * 2 ) / numberOfPanels ) / 2 ) );
+
     // or simplified to
-    var tz = Math.round( ( panelSize / 2 ) / 
+    var tz = Math.round( ( panelSize / 2 ) /
       Math.tan( Math.PI / numberOfPanels ) );
 
 计算好卡片的位置之后，然后旋转`#carousel`就可以了，当然这个要用js来控制了：
@@ -787,3 +791,5 @@ js代码如下：
 
 ##结语
 终于完成了这篇，梳理的过程对我自己很有提高，希望对你也能有些帮助，有兴趣可以关注我，期待下以后的博客~
+
+<link rel="stylesheet" href="/css/css3-ani.css">

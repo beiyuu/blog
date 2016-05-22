@@ -75,6 +75,7 @@ Backbone算轻量级的MVC框架，他的优雅之处在于，他为复杂的代
 Model就是要操作对象的数据结构，存储需要用到的数据，基于这些数据，会有大量的交互、验证等等操作。
 
 ###Model声明
+
 根据要做的便签的需要，数据结构定义为如下：
 
     var Note = Backbone.Model.extend({
@@ -103,6 +104,7 @@ Model就是要操作对象的数据结构，存储需要用到的数据，基于
 可以看到，我们定义了Note的Model的默认值，还有initialize和remove方法，当new一个Note对象时候，initialize方法会执行，默认的值也会赋给new的对象。
 
 ###Model值的set方法
+
 也可以在new的时候修改覆盖默认值：
 
     var note1 = new Note({title:'New Note',content:'This is the new note'});//覆盖默认的title和content
@@ -133,6 +135,7 @@ Model就是要操作对象的数据结构，存储需要用到的数据，基于
     });
 
 ###与服务端的交互
+
 在这个应用中，无需与服务端交互，用了那个localStorage的补充插件之后，同样调用save()和destory()方法就好，该插件会自动完成相应的工作，真正与服务端的交互也很简单：
 
     var UserModel = Backbone.Model.extend({
@@ -205,7 +208,7 @@ Model就是要操作对象的数据结构，存储需要用到的数据，基于
         ,email: 'Notty@example.com'
     });
 
-    // 因为有id，所以触发 DESTROY /user/1 
+    // 因为有id，所以触发 DESTROY /user/1
     user.destroy({
         success: function () {
             alert('Destroyed');
@@ -295,6 +298,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 在这个应用中，分离了每个便签的View和整个app的View，这样做的好处是逻辑、代码更清晰。
 
 ###el属性
+
 `this.el`是这个View的DOM引用，使用它可以方便的做很多操作DOM的事情。注意到在这个View的声明里面，定义了template函数，不适用Underscore自带的template的函数的原因是Chrome Manifest V2的版本里面不允许出现`new Function`，导致很多模板库不能使用，只好自己重写一个简单的。`template`在这个场景还是能非常方便的解决一些问题的。
 
 使用`this.el`我们如何给View填充数据呢，很简单：
@@ -326,6 +330,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 在`initialize`方法中，可以初始化这些事情，需要更多的初始化工作，继续写写下去就好。
 
 ###事件的监听
+
 你肯定注意到了声明View代码中的下面这些：
 
     ,events:{
@@ -341,6 +346,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 这些用来给View绑定事件，就和平常使用jQuery一样的用法，相信你一看就明白。
 
 ###appView
+
 `appView`并不是Backbone的内容，而是在这个应用中，我们用来粘合所有元素的一个容器，为了将整个流程串联起来，有一个总体的概念，我会详细解释这部分的代码：
 
     var appView = Backbone.View.extend({
@@ -374,7 +380,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
             view.bringNoteToContainer(view)
             return ele;
         }
-        
+
         //当用户自主添加的时候，增加动画效果
         ,addOne:function(note){
             //前面的初始化还是一样
@@ -431,6 +437,7 @@ Collection的概念很好理解，他就是Model的一个简单集合，举几�
 Chrome插件开发的流程很舒适、自然。为了先配好环境，就先大致的介绍一下插件开发的相关事宜。如果比较熟悉，可忽略跳过。更详细全面的说明参考[官方文档][5]。
 
 ###manifest.json
+
 每一个插件的`manifest.json`文件必不可少，看看[Notty Notes][Notty]，也就是我们要写的插件的`manifest.json`的内容吧：
 
 
@@ -478,6 +485,7 @@ Chrome插件开发的流程很舒适、自然。为了先配好环境，就先�
 `permissions`项是向Chrome请求需要的权限，在用户安装插件额时候，会有提示，可声明的权限可以参考[Permissions][9]。
 
 ###开发调试
+
 关于文件的组织，除了`manifest.json`文件需要放在根目录之外，其他文件放在`manifest`中指定的位置即可，不得不说，很愉悦。
 
 开发调试过程简单方便，在`扩展程序`的管理页面，选择`载入正在开发的扩展程序`，加载正在开发的文件目录就好，单页的应用，可直接在应用当页使用开发工具调试，`background`类型的也可以方便的在`扩展程序`页面看到打开调试工具的按钮。
@@ -485,7 +493,9 @@ Chrome插件开发的流程很舒适、自然。为了先配好环境，就先�
 做完准备工作，余下的开发过程就同平常一样，修改代码，刷新，看效果，调BUG，毫无不适。
 
 ##Chrome Web Store
+
 ###账号注册
+
 [Chrome Web Store][4]在早起测试阶段，可以免费注册使用，现在注册一个可发布应用的账号需要支付5美元的费用，而且得是信用卡，之前一直没办信用卡，所以写了的插件只能自己打包发布管理，异常的纷杂，办信用卡之后，第一件事就是注册Chrome Web Store。
 
 需要注意的一点是，填写地址部分，没有中国大陆的选项，不知道Google会不会检查信用卡发卡地和地址是否匹配，我选择了香港，瞎填了地址，也通过了，仅供参考。
@@ -521,5 +531,5 @@ Chrome Store上插件的发布很简单，把自己的插件按要求打包好�
 [22]:    http://www.cnblogs.com/nuysoft/archive/2012/03/19/2404274.html "Backbone 架构分析"
 [23]:    http://blog.csdn.net/soasme/article/details/6581029 "Backbone HelloWorld"
 [24]:    http://weakfi.iteye.com/blog/1391990 "Backbone初探"
-[25]:    http://floatleft.com/notebook/backbone-has-made-me-a-better-programmer "Backbone has made me a better programmer" 
+[25]:    http://floatleft.com/notebook/backbone-has-made-me-a-better-programmer "Backbone has made me a better programmer"
 [26]:    http://www.douban.com/people/JGuo/
